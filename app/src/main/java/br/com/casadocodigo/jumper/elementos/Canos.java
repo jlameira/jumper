@@ -19,6 +19,7 @@ public class Canos {
     public Canos(Tela tela){
         int posicao = 20;
 
+
         for (int i = 0 ; i < QUANTIDADE_DE_CANOS; i++ ){
             posicao += DISTANCIA_ENTRE_CANOS;
             this.canos.add(new Cano(tela,posicao));

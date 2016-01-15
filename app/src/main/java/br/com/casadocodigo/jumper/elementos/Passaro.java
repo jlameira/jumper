@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import br.com.casadocodigo.jumper.engine.Cores;
+import br.com.casadocodigo.jumper.engine.Tela;
 
 /**
  * Created by jonathan on 12/01/16.
@@ -15,8 +16,10 @@ public class Passaro {
 
 
     private int altura;
+    private Tela tela;
 
-    public Passaro(){
+    public Passaro(Tela tela){
+        this.tela = tela;
         this.altura = 100;
     }
 
@@ -25,10 +28,16 @@ public class Passaro {
     }
 
     public void cai(){
-        this.altura += 5;
+        boolean chegouNoChao = this.altura + RAIO > tela.getAltura();
+
+        if (!chegouNoChao) {
+            this.altura += 5;
+        }
     }
 
     public void pula(){
-        this.altura -= 150;
+        if(this.altura > RAIO) {
+            this.altura -= 90;
+        }
     }
 }

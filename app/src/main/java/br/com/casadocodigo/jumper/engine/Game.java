@@ -73,7 +73,7 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
     private void inicializaElementos(){
        Bitmap back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         this.background = Bitmap.createScaledBitmap(back, back.getWidth(), tela.getAltura(), false);
-        this.passaro = new Passaro();
+        this.passaro = new Passaro(this.tela);
        this.canos = new Canos(this.tela);
     }
 

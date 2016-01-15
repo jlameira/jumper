@@ -13,6 +13,7 @@ import br.com.casadocodigo.jumper.R;
 import br.com.casadocodigo.jumper.elementos.Cano;
 import br.com.casadocodigo.jumper.elementos.Canos;
 import br.com.casadocodigo.jumper.elementos.Passaro;
+import br.com.casadocodigo.jumper.elementos.Pontuacao;
 
 /**
  * Created by jonathan on 12/01/16.
@@ -32,6 +33,10 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
     private Cano cano;
 
     private Canos canos;
+
+    private Pontuacao pontuacao;
+
+    private VerificadorDeColisao verificadorDeColisao;
 
     public Game(Context context){
         super(context);
@@ -53,10 +58,17 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
 
             this.passaro.desenhaNo(canvas);
             this.passaro.cai();
+
+
             this.canos.desenhaNo(canvas);
             this.canos.move();
 
+            this.pontuacao.desenhaNo(canvas);
+
             this.holder.unlockCanvasAndPost(canvas);
+            if (this.verificadorDeColisao.temColisao()){
+                cancela();
+            }
 
         }
 
@@ -71,10 +83,13 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
     }
 
     private void inicializaElementos(){
+        this.pontuacao = new Pontuacao();
        Bitmap back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         this.background = Bitmap.createScaledBitmap(back, back.getWidth(), tela.getAltura(), false);
         this.passaro = new Passaro(this.tela);
-       this.canos = new Canos(this.tela);
+       this.canos = new Canos(this.tela,pontuacao);
+
+        this.verificadorDeColisao = new VerificadorDeColisao(passaro,canos);
     }
 
 

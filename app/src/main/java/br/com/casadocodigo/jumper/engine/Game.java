@@ -12,6 +12,7 @@ import android.view.View;
 import br.com.casadocodigo.jumper.R;
 import br.com.casadocodigo.jumper.elementos.Cano;
 import br.com.casadocodigo.jumper.elementos.Canos;
+import br.com.casadocodigo.jumper.elementos.GameOver;
 import br.com.casadocodigo.jumper.elementos.Passaro;
 import br.com.casadocodigo.jumper.elementos.Pontuacao;
 
@@ -54,7 +55,7 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
 
             Canvas canvas = this.holder.lockCanvas();
 
-            canvas.drawBitmap(this.background,0,0,null);
+            canvas.drawBitmap(this.background, 0, 0, null);
 
             this.passaro.desenhaNo(canvas);
             this.passaro.cai();
@@ -65,10 +66,11 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
 
             this.pontuacao.desenhaNo(canvas);
 
-            this.holder.unlockCanvasAndPost(canvas);
             if (this.verificadorDeColisao.temColisao()){
+                new GameOver(this.tela).desenhaNo(canvas);
                 cancela();
             }
+            this.holder.unlockCanvasAndPost(canvas);
 
         }
 

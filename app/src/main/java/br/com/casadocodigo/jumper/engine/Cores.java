@@ -27,7 +27,17 @@ public class Cores {
         branco.setColor(0xFFFFFFFF);
         branco.setTextSize(80);
         branco.setTypeface(Typeface.DEFAULT_BOLD);
-        branco.setShadowLayer(3,5,5,0XFF000000);
+        branco.setShadowLayer(3, 5, 5, 0xFF000000);
         return branco;
+    }
+
+    public static Paint getCorDoGameOver(){
+        Paint vermelhor = new Paint();
+        vermelhor.setColor(0xFFFF0000);
+        vermelhor.setTextSize(50);
+        vermelhor.setTypeface(Typeface.DEFAULT_BOLD);
+        vermelhor.setShadowLayer(2, 3, 3, 0xFF000000);
+
+        return vermelhor;
     }
 }

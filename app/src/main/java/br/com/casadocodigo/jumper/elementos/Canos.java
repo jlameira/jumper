@@ -1,5 +1,6 @@
 package br.com.casadocodigo.jumper.elementos;
 
+import android.content.Context;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
@@ -18,16 +19,18 @@ public class Canos {
     private final List<Cano> canos = new ArrayList<Cano>();
     private Tela tela;
     private final Pontuacao pontuacao;
+    private Context context;
 
-    public Canos(Tela tela, Pontuacao pontuacao){
+    public Canos(Context context,Tela tela, Pontuacao pontuacao){
         this.tela = tela;
         this.pontuacao = pontuacao;
         int posicao = 20;
+        this.context = context;
 
 
         for (int i = 0 ; i < QUANTIDADE_DE_CANOS; i++ ){
             posicao += DISTANCIA_ENTRE_CANOS;
-            this.canos.add(new Cano(tela,posicao));
+            this.canos.add(new Cano(context,tela,posicao));
         }
     }
 
@@ -46,7 +49,7 @@ public class Canos {
                 if (cano.saiuDaTela()) {
                     this.pontuacao.aumenta();
                     iterator.remove();
-                    Cano outroCano = new Cano(this.tela, maiorPosicao() + DISTANCIA_ENTRE_CANOS);
+                    Cano outroCano = new Cano(this.context,this.tela, maiorPosicao() + DISTANCIA_ENTRE_CANOS);
                     iterator.add(outroCano);
                 }
         }

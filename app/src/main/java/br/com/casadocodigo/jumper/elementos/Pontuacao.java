@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import br.com.casadocodigo.jumper.engine.Cores;
+import br.com.casadocodigo.jumper.engine.Som;
 
 /**
  * Created by jonathan on 15/01/16.
@@ -14,8 +15,15 @@ public class Pontuacao {
 
     private int pontos = 0;
 
+    private Som som;
+
+    public Pontuacao(Som som){
+        this.som = som;
+    }
+
 
     public void aumenta(){
+        this.som.toca(Som.PONTUACAO);
         this.pontos ++;
     }
 

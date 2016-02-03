@@ -22,26 +22,23 @@ import br.com.casadocodigo.jumper.elementos.Pontuacao;
 public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
 
     public boolean estaRodando = true;
-
     private final SurfaceHolder holder = getHolder();
-
     private Passaro passaro;
-
     private Bitmap background;
-
     private Tela tela;
-
     private Cano cano;
-
     private Canos canos;
-
     private Pontuacao pontuacao;
-
     private VerificadorDeColisao verificadorDeColisao;
+    private Som som;
+    private Context context;
+    private Tempo tempo;
 
     public Game(Context context){
         super(context);
+        this.context = context;
         this.tela = new Tela(context);
+        this.som = new Som(context);
         inicializaElementos();
         setOnTouchListener(this);
     }
@@ -57,8 +54,10 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
 
             canvas.drawBitmap(this.background, 0, 0, null);
 
+            this.tempo.passa();
+
             this.passaro.desenhaNo(canvas);
-            this.passaro.cai();
+            this.passaro.voa();
 
 
             this.canos.desenhaNo(canvas);
@@ -67,6 +66,7 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
             this.pontuacao.desenhaNo(canvas);
 
             if (this.verificadorDeColisao.temColisao()){
+                this.som.toca(Som.COLISAO);
                 new GameOver(this.tela).desenhaNo(canvas);
                 cancela();
             }
@@ -85,11 +85,12 @@ public class Game extends SurfaceView implements Runnable,View.OnTouchListener{
     }
 
     private void inicializaElementos(){
-        this.pontuacao = new Pontuacao();
+        this.tempo = new Tempo();
+        this.pontuacao = new Pontuacao(this.som);
        Bitmap back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         this.background = Bitmap.createScaledBitmap(back, back.getWidth(), tela.getAltura(), false);
-        this.passaro = new Passaro(this.tela);
-       this.canos = new Canos(this.tela,pontuacao);
+        this.passaro = new Passaro(this.context,this.tela,this.som,this.tempo);
+       this.canos = new Canos(this.context,this.tela,pontuacao);
 
         this.verificadorDeColisao = new VerificadorDeColisao(passaro,canos);
     }

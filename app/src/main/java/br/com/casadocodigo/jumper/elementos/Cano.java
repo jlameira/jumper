@@ -15,7 +15,7 @@ import br.com.casadocodigo.jumper.engine.Tela;
  */
 public class Cano {
 
-    private static final int TAMANHO_DO_CANO = 230;
+    private static final int TAMANHO_DO_CANO = 250;
     private static final int LARGURA_DO_CANO = 100;
     private int alturaDoCanoInferior;
     private Tela tela;
@@ -49,9 +49,9 @@ public class Cano {
 
     private void desenhaCanoInferiorNo(Canvas canvas) {
         canvas.drawBitmap(this.canoInferior,
-                            this.posicao,
-                            this.alturaDoCanoInferior,
-                            null);
+                this.posicao,
+                this.alturaDoCanoInferior,
+                null);
         /*canvas.drawRect(this.posicao,
                 this.alturaDoCanoInferior,
                 this.posicao + LARGURA_DO_CANO,
@@ -95,5 +95,9 @@ public class Cano {
 
     public boolean cruzouHorizontalmenteComOPassaro() {
         return this.posicao - Passaro.X < Passaro.RAIO;
+    }
+
+    public boolean canoPassou(Passaro passaro){
+        return this.posicao + LARGURA_DO_CANO < Passaro.RAIO;
     }
 }

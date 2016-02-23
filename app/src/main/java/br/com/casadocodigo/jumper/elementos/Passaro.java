@@ -24,7 +24,7 @@ public class Passaro {
     private Tempo tempo;
     private int altura;
     private Tela tela;
-    private static final int DESLOCAMENTO_DO_PULO = 5;
+    private static final int DESLOCAMENTO_DO_PULO = 7;
 
     public Passaro(Context context,Tela tela, Som som, Tempo tempo){
         this.tela = tela;

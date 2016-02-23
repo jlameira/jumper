@@ -24,7 +24,7 @@ public class Canos {
     public Canos(Context context,Tela tela, Pontuacao pontuacao){
         this.tela = tela;
         this.pontuacao = pontuacao;
-        int posicao = 20;
+        int posicao = 500;
         this.context = context;
 
 
@@ -65,7 +65,8 @@ public class Canos {
 
     public boolean temColisaoCom(Passaro passaro) {
         for (Cano cano : this.canos){
-            if (cano.cruzouHorizontalmenteComOPassaro() && cano.cruzouVerticalmenteComOPassaro(passaro) ) {
+            if (cano.cruzouHorizontalmenteComOPassaro() && cano.cruzouVerticalmenteComOPassaro(passaro) &&
+                    !cano.canoPassou(passaro)) {
                 return true;
             }
         }

@@ -7,7 +7,7 @@ public class Tempo {
     private double atual;
 
     public void passa(){
-        atual += 0.1;
+        atual += 0.05;
     }
 
     public void reinicia(){
